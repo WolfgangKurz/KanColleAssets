@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제독업무도 바빠! 업데이트</title>
+<style type="text/css">
+* { box-sizing: border-box }
+body {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	height: 100%;
+	background-color: #d9d9d9;
+	font-size: 14px;
+	color: #f0f0f0;
+}
+.container {
+	max-width: 882px;
+	margin: 20px auto;
+	background-color: #1a1a1c;
+	border: 1px solid #007acc;
+	box-shadow: 0 0 7px rgba(0, 122, 204, 0.64);
+}
+.top-header {
+	margin-bottom: 2px;
+	padding: 8px;
+	background-color: #2c2c30;
+	line-height: 32px;
+	font-size: 16px;
+}
+.app-icon {
+	display: inline-block;
+	margin-right: 8px;
+	width: 32px;
+	height: 32px;
+	vertical-align: top;
+}
+.app-icon > img {
+	display: block;
+	width: 32px;
+	height: 32px;
+}
+.content {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: -ms-flex;
+	display: flex;
+}
+.update-list {
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #1a1a1c;
+	list-style: none;
+}
+.update-list li {
+	padding: 8px 15px;
+	margin: 0;
+	cursor: default;
+}
+.update-list li.current {
+	background-color: #2c2c30;
+	color: #28a0f0;
+}
+.update-list li.disabled { color: #b4b4b4 }
+.update-list li:not(.disabled):hover {
+	background-color: #3E3E46;
+	color: #f0f0f0;
+}
+.update-content {
+	padding: 10px 15px;
+	min-height: 320px;
+	background-color: #2c2c30;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.update-content a {
+	display: inline-block;
+	text-decoration: underline;
+	color: #d8d8d8;
+}
+.update-name { font-size: 1.1rem }
+.update-url {
+	margin-bottom: 30px;
+	font-size: 0.7rem;
+}
+.tab-name { font-weight: 600 }
+.merged-time {
+	font-size: 0.7rem;
+	opacity: 0.72;
+}
+
+.update-content h1, .update-content h2, .update-content h3,
+.update-content h4, .update-content h5, .update-content h6 {
+	margin: 0 0 16px 0;
+	font-weight: 600;
+	line-height: 1.25;
+}
+.update-content h1 {
+	padding-bottom: 0.3em;
+	font-size: 2rem;
+	border-bottom: 1px solid #eaecef;
+}
+.update-content h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.5rem;
+	border-bottom: 1px solid #eaecef;
+}
+.update-content h3 { font-size: 1.25rem }
+.update-content h4 { font-size: 1rem }
+.update-content h5 { font-size: 0.875rem }
+.update-content h6 {
+	font-size: 0.85rem;
+	color:#6a737d;
+}
+.update-content ul {
+	margin: -10px 0 20px 0;
+	padding: 5px 0 0 20px;
+}
+.update-content ul li { margin: 5px 0 0 }
+</style>
+<script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/1.6.4/dist/showdown.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="top-header">
+		<div class="app-icon">
+			<img src="https://raw.githubusercontent.com/CirnoV/KanColleViewer/master/resources/icons/application/64.png">
+		</div>
+		제독업무도 바빠! 업데이트
+	</div>
+	<div class="content">
+		<ul class="update-list">
+			<li class="disabled">불러오는 중...</li>
+		</ul>
+		<div class="update-content">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+"use strict";
+!function(){
+	String.format = function(template){
+		for(var i=1; i<arguments.length; i++){
+			var reg = new RegExp("\\{"+(i-1)+"\\}", "g");
+			template = template.replace(reg, arguments[i]);
+		}
+		return template;
+	};
+	Number.prototype.format = function(x){
+		if(this<10) return "0"+this.toString();
+		return this.toString();
+	};
+
+	var converter = new showdown.Converter({ disableForced4SpacesIndentedSublists:true });
+	var clearTabs = function(){
+		var list = document.querySelector(".update-list");
+		list.innerHTML = "";
+	};
+	var addTab = function(tabName, tabContent, pullURL, mergeTime){
+		var list = document.querySelector(".update-list");
+		var item = document.createElement("li");
+
+		{
+			var elem = document.createElement("div");
+			elem.className = "tab-name";
+			elem.innerHTML = tabName;
+			item.appendChild(elem);
+
+			var date = new Date(mergeTime);
+			date = String.format(
+				"{0}-{1}-{2} {3}:{4}:{5} KST",
+				date.getFullYear(),
+				(date.getMonth()+1).format(),
+				date.getDate().format(),
+				date.getHours().format(),
+				date.getMinutes().format(),
+				date.getSeconds().format()
+			);
+			elem = document.createElement("div");
+			elem.className = "merged-time";
+			elem.innerHTML = date;
+			item.appendChild(elem);
+		}
+		item.addEventListener("click", function(){
+			var content = document.querySelector(".update-content");
+			content.innerHTML = "";
+
+			var elem = document.createElement("div");
+			elem.className = "update-name";
+			elem.innerHTML = tabName;
+			content.appendChild(elem);
+
+			elem = document.createElement("a");
+			elem.className = "update-url";
+			elem.href = pullURL;
+			elem.target = "_blank";
+			elem.innerHTML = pullURL;
+			content.appendChild(elem);
+
+			content.innerHTML += converter.makeHtml(tabContent);
+
+			var listitems = document.querySelectorAll(".update-list > li");
+			listitems.forEach(function(e){ e.className = "" });
+			this.className = "current";
+		});
+		list.appendChild(item);
+
+		if(list.children.length==1) {
+			if(document.createEventObject) {
+				item.fireEvent("onclick");
+			} else {
+				var e = document.createEvent("HTMLEvents");
+				e.initEvent("click", false, true),
+				item.dispatchEvent(e);
+			}
+		}
+	};
+
+	var pull_url = "https://api.github.com/repos/CirnoV/KanColleViewer/pulls?state=all&base=update";
+	var ajax = new XMLHttpRequest();
+
+	ajax.addEventListener("loadend", function(){
+		if(ajax.readyState==4){
+			clearTabs();
+
+			var json = JSON.parse(ajax.responseText);
+			for(var i=0; i<json.length; i++){
+				var pull = json[i];
+				addTab(pull.title, pull.body, pull.html_url, pull.merged_at);
+			}
+		}
+	});
+
+	var error_content = "### 💬 오류\n"
+		+ "- 업데이트 내역을 불러오는데 실패했습니다.\n"
+		+ "- 다음을 시도해보시기 바랍니다.\n"
+		+ "  * 네트워크 환경 검사\n"
+		+ "  * 페이지 새로 고침";
+	ajax.addEventListener("error", function(){ addTab("오류", error_content) });
+	ajax.addEventListener("abort", function(){ addTab("오류", error_content) });
+
+	ajax.open("GET", pull_url, true);
+	ajax.overrideMimeType("application/json");
+	ajax.send();
+}();
+</script>
+</body>
+</html>
