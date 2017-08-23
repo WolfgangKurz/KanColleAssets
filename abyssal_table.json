@@ -47,7 +47,7 @@
 {"id":1528,"hp":96,"armor":80,"evasion":45,"carry":96,"fire":25,"torpedo":0,"aa":50,"asw":0,"speed":10,"range":4,"los":50,"luck":20,"slots":3,"equips":[520,517,524,-1,-1],"carrys":[32,32,32,0,0]},
 {"id":1579,"hp":96,"armor":80,"evasion":45,"carry":96,"fire":25,"torpedo":0,"aa":50,"asw":0,"speed":10,"range":4,"los":50,"luck":30,"slots":4,"equips":[547,548,549,549,-1],"carrys":[32,32,27,5,0]},
 {"id":1614,"hp":96,"armor":80,"evasion":45,"carry":96,"fire":25,"torpedo":0,"aa":50,"asw":0,"speed":10,"range":4,"los":50,"luck":30,"slots":4,"equips":[556,548,558,549,-1],"carrys":[32,32,27,5,0]},
-{"id":1615,"hp":96,"armor":80,"evasion":45,"carry":118,"fire":25,"torpedo":0,"aa":50,"asw":0,"speed":10,"range":4,"los":50,"luck":30,"slots":4,"equips":[556,548,558,558,-1],"carrys":[32,32,27,27,0]},
+{"id":1615,"hp":96,"armor":80,"evasion":45,"carry":118,"fire":25,"torpedo":0,"aa":50,"asw":0,"speed":10,"range":4,"los":50,"luck":30,"slots":4,"equips":[556,548,558,558,-1],"carrys":[32,32,27,5,0]},
 {"id":1565,"hp":160,"armor":120,"evasion":50,"carry":144,"fire":40,"torpedo":0,"aa":90,"asw":0,"speed":10,"range":4,"los":60,"luck":30,"slots":4,"equips":[521,524,518,518,-1],"carrys":[36,36,36,36,0]},
 {"id":1616,"hp":160,"armor":120,"evasion":50,"carry":144,"fire":40,"torpedo":0,"aa":90,"asw":0,"speed":10,"range":4,"los":60,"luck":30,"slots":4,"equips":[547,523,549,549,-1],"carrys":[36,36,36,36,0]},
 {"id":1617,"hp":160,"armor":120,"evasion":50,"carry":144,"fire":40,"torpedo":0,"aa":90,"asw":0,"speed":10,"range":4,"los":60,"luck":30,"slots":4,"equips":[556,523,558,549,-1],"carrys":[36,36,36,36,0]},
